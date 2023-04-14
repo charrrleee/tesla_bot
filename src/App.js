@@ -1,9 +1,7 @@
 import './App.css';
-import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
+import { Configuration, OpenAIApi } from "openai";
 import SendIcon from '@mui/icons-material/Send';
-import { Icon, Input } from '@mui/material';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import userIcon from './assets/user.png';
 import botIcon from './assets/tesla.png';
 
@@ -20,28 +18,44 @@ const App = () =>  {
     setInputValue(event.target.value);
   };
 
-  const handleInputSubmit = (event) => {
+  const handleInputSubmit = async (event) => {
     event.preventDefault();
 
     if (inputValue.trim() === '') {
       return;
     }
 
+    const response = await sendToChatGPT(inputValue)
     const newMessage = {
       isUser: true,
       message: inputValue,
     };
 
+    setMessages((prevMessages) => [...prevMessages, newMessage]);
 
     const newResponseMessage = {
       isUser: false,
-      message: "As an AI language model, \n I do not have personal preferences, but can provide information on the different Tesla models to help you make a decision base n\nTesla currently has four car models available: \n\n1. Model S: Tesla's luxury sedan, which offers a long range, high performance, and advanced safety features. It has the sengers comfortably. \n\n2. Model 3: Tesla's midsize sedan, which is the most affordable option in the lineup while still offering impressive performance and a long range. n\n3. Model X: Tesla's SUV, which offers impressive performance and can seat up to seven passengers. It also has falcon-wing doors that provide convenient access to the back mpact SUV, which offers balance between range, performance, and cargo space. It seats up to five passengers and has similar features to the Model 3 sedan. In\nUltimately, depend on your individual needs and preferences. Factors to consider include your daily commute, desired range, passenger capacity, and technology features. I suggest visiti learn more about the different models and their features to make an informed decision.",
+      message: response.data.choices[0].message.content,
     };
 
-    setMessages((prevMessages) => [...prevMessages, newMessage]);
     setMessages((prevMessages) => [...prevMessages, newResponseMessage]);
     setInputValue('');
   };
+
+  const sendToChatGPT = async (text) => {
+    const configuration = new Configuration({
+      apiKey: "",
+    });
+    const openai = new OpenAIApi(configuration);
+    const completion = await openai.createChatCompletion({
+      model: "gpt-3.5-turbo",
+      messages: [
+        {"role": "system", "content": "You are a Tesla website customer service"},
+        {"role": "user", "content": text},
+      ],
+    });
+    return completion
+  }
 
   return (
     <body>
