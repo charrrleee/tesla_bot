@@ -36,3 +36,48 @@
     transform: rotate(360deg);
   }
 }
+
+.user-message {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 10px;
+}
+
+.chatbot-message {
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  margin: 10px;
+}
+
+.message-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-form {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+input[type="text"] {
+  flex-grow: 1;
+}
+
+.send-button {
+  background-color: transparent;
+  border: none;
+  margin-left: 10px;
+  cursor: pointer;
+}
+
+.app {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
