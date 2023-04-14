@@ -9,7 +9,7 @@ const App = () =>  {
   const [messages, setMessages] = useState([
     {
       isUser: false,
-      message: 'Hi there!',
+      message: 'Hi there! This is Tesla AI ChatBot, what can I help you?',
     },
   ]);
   const [inputValue, setInputValue] = useState('');
@@ -58,28 +58,28 @@ const App = () =>  {
   }
 
   return (
-    <body>
-      <div className='app'>
-        <div style={{backgroundColor: "grey"}}> 
-          {messages.map((message, index) => (
-            message.isUser ? (
-              <div key={index} className="user-message">
-                <div className="user-message-container">
-                  <img src={message.isUser ? userIcon : botIcon} alt='User' className="icon" style={{ width: '20px', height: '20px', margin: '10px 10px'}} />
-                  <p style={{margin: 0}}>{message.message}</p>
+    <body  className='app'>
+      <div> 
+        {messages.map((message, index) => (
+          message.isUser ? (
+            <div key={index} className="user-message">
+              <div className="user-message-container">
+                <img src={message.isUser ? userIcon : botIcon} alt='User' className="icon" style={{ width: '20px', height: '20px', margin: '10px 10px'}} />
+                <p style={{margin: 0}}>{message.message}</p>
+              </div>
+            </div>
+          ) : (
+            <div key={index} className="chatbot-message">
+                <div className="chatbot-message-container">
+                  <p style={{margin: 0, whiteSpace: "pre-wrap"}}>{message.message}</p>
+                  <img src={message.isUser ? userIcon : botIcon} alt='Chatbot' className="icon" style={{ width: '20px', height: '20px', margin: '10px 10px'}} />
                 </div>
-              </div>
-            ) : (
-              <div key={index} className="chatbot-message">
-                  <div className="chatbot-message-container">
-                    <p style={{margin: 0, whiteSpace: "pre-wrap"}}>{message.message}</p>
-                    <img src={message.isUser ? userIcon : botIcon} alt='Chatbot' className="icon" style={{ width: '20px', height: '20px', margin: '10px 10px'}} />
-                  </div>
-              </div>
-            )
-            
-          ))}
-        </div>
+            </div>
+          )
+          
+        ))}
+      </div>
+      <div>
         <form onSubmit={handleInputSubmit} className="input-form">
           <input className="input" type="text" value={inputValue} onChange={handleInputChange} />
           <button type="submit" className="send-button">
