@@ -25,13 +25,15 @@ const App = () =>  {
       return;
     }
 
-    const response = await sendToChatGPT(inputValue)
     const newMessage = {
       isUser: true,
       message: inputValue,
     };
 
     setMessages((prevMessages) => [...prevMessages, newMessage]);
+    setInputValue('');
+    
+    const response = await sendToChatGPT(inputValue)
 
     const newResponseMessage = {
       isUser: false,
@@ -39,7 +41,6 @@ const App = () =>  {
     };
 
     setMessages((prevMessages) => [...prevMessages, newResponseMessage]);
-    setInputValue('');
   };
 
   const sendToChatGPT = async (text) => {
