@@ -55,17 +55,41 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  border: black 1px solid;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.user-message-container{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: black 1px solid;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: yellow;
+}
+
+.chatbot-message-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: black 1px solid;
+  padding: 10px;
+  border-radius: 10px;
+  background-color: aqua;
 }
 
 .input-form {
   display: flex;
   align-items: center;
-  margin-left: 20px;
-  margin-right: 20px;
+  margin: 20px;
 }
 
 input[type="text"] {
   flex-grow: 1;
+  padding: 10px;
+  border-radius: 10px;
 }
 
 .send-button {
@@ -76,8 +100,8 @@ input[type="text"] {
 }
 
 .app {
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  background-color: grey;
 }
